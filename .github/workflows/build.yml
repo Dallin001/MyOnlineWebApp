@@ -1,11 +1,11 @@
 
 name: DOTNET_MVC_CI_Pipeline
 
-on:
+'on':
   push:
     tags:
-      - 'v*' # Triggers when tags starting with v are pushed
-  workflow_dispatch: # Allows manual pipeline triggers
+      - "v*"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: "8.0.x"
 
       - name: Restore Dependencies
         run: dotnet restore
