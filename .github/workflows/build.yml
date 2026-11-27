@@ -1,21 +1,27 @@
-yaml
+
 name: DOTNET_MVC_CI_Pipeline
+
 on:
-push:
-tags:
-- 'v*' # Triggers automatically when tags starting with 'v' are pushed
-workflow_dispatch: # Allows manual pipeline triggers from the GitHub UI
+  push:
+    tags:
+      - 'v*' # Triggers when tags starting with v are pushed
+  workflow_dispatch: # Allows manual pipeline triggers
+
 jobs:
-build:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout Code
-uses: actions/checkout@v4
-- name: Setup .NET SDK
-uses: actions/setup-dotnet@v4
-with:
-dotnet-version: '8.0' # Adjust this to '6.0' or '7.0' if using an older SDK
-- name: Restore Dependencies
-run: dotnet restore
-- name: Build Application
-run: dotnet build --configuration Release --no-restore
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build Application
+        run: dotnet build --configuration Release --no-restore
